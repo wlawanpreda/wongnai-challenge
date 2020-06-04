@@ -1,0 +1,16 @@
+version: '1'
+services:
+
+  api:
+    build: ./api
+    container_name: api
+    ports:
+      - 5556:5556
+
+  ui:
+    build: ./ui
+    container_name: ui
+    ports:
+      - 5555:5555
+    links:
+      - api
