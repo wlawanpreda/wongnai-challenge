@@ -6,5 +6,5 @@ COPY . /app
 RUN yarn
 RUN yarn build
 
-EXPOSE 5556
+EXPOSE 5555
 CMD [ "yarn", "start" ]
