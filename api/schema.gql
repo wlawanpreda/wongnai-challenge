@@ -1,0 +1,24 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Review {
+  reviewID: Int!
+  review: String!
+  version: Int
+}
+
+type Query {
+  reviews: [Review!]!
+  edit: [Float!]!
+  keywords(query: String): [String!]!
+}
+
+type Mutation {
+  reserveEdit(id: Float!): Boolean!
+  editReview(version: Float!, review: String!, id: Float!): Review!
+}
+
+type Subscription {
+  editing: [Float!]!
+}
