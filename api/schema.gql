@@ -10,9 +10,14 @@ type Review {
 
 type Query {
   reviews: [Review!]!
+  edit: [Float!]!
+}
+
+type Mutation {
   reserveEdit(id: Float!): Boolean!
+  editReview(version: Float!, review: String!, id: Float!): Review!
 }
 
 type Subscription {
-  editing: [String!]!
+  editing: [Float!]!
 }

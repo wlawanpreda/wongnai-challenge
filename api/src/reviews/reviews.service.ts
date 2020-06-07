@@ -12,7 +12,7 @@ import { PubSub } from "graphql-subscriptions";
 export class ReviewsService {
 
     private reviews: Review[] = [];
-    private editing: String[] = [];
+    private editing: number[] = [1];
 
     public pubSub = new PubSub();
 
@@ -47,14 +47,38 @@ export class ReviewsService {
     }
 
     editReviewById(id: number, review: string, version: number): Review {
-        const foundIndex = this.reviews.findIndex(({reviewID}) => reviewID===id);
+        const foundIndex = this.reviews.findIndex(({reviewID}) => reviewID==id);
+        if(foundIndex===-1) throw `can not find this id;${id}`;
+
         const target = this.reviews[foundIndex];
-        if(target.version!==version)
-            throw "version not match";
+        if(target.version!==version) throw "version not match";
 
         target.review = review;
         target.version++;
+
+        this.editing = this.editing.filter(v => v!==id);
+
+
+        this.pubSub.publish('editing', { 
+            editing: this.editing,
+            updateData: target
+        });
         return target;
+    }
+
+    getEditing(): number[] {
+        return this.editing;
+    }
+
+    reserveEdit(id: number) {
+        if(this.editing.includes(id)) {
+            return false;
+        } else {
+            const { editing } = this;
+            this.editing.push(id);
+            this.pubSub.publish('editing', { editing: this.editing });
+            return true;
+        }
     }
 
 }

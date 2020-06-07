@@ -1,4 +1,4 @@
-import { Query, Resolver, Subscription, Args } from '@nestjs/graphql';
+import { Query, Mutation, Subscription, Resolver, Args } from '@nestjs/graphql';
 import { Review } from "./model/reviews.model";
 import { ReviewsService } from './reviews.service';
 
@@ -11,18 +11,29 @@ export class ReviewsResolver {
     reviews(): Review[] {
         return this.reviewsService.findAll();
     }
-
-    @Query(returns => Boolean)
-    reserveEdit(@Args('id') id: number) {
-        // check 
-
-        //reserve
-        return true;
+    @Query(returns => [Number])
+    edit(): Number[] {
+        return this.reviewsService.getEditing();
     }
 
-    @Subscription(returns => [String])
+    // how to set timeout per once edit
+    @Mutation(returns => Boolean)
+    reserveEdit(@Args('id') id: number) {
+        return this.reviewsService.reserveEdit(id);
+    }
+
+    @Mutation(returns => Review)
+    editReview(
+        @Args('id') id: number,
+        @Args('review') review: string,
+        @Args('version') version: number
+    ) {
+        return this.reviewsService.editReviewById(id, review, version);
+    }
+
+    @Subscription(returns => [Number])
     editing() {
-        return this.reviewsService.pubSub.asyncIterator('editing');
+        return this.reviewsService.pubSub.asyncIterator(['editing']);
     }
     
 }
