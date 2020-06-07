@@ -5,12 +5,18 @@ import * as fs from "fs";
 import * as path from "path";
 import * as csv from "fast-csv";
 
+
+import { PubSub } from "graphql-subscriptions";
+
 @Injectable()
 export class ReviewsService {
 
     private reviews: Review[] = [];
+    private editing: String[] = [];
 
-     constructor() {
+    public pubSub = new PubSub();
+
+    constructor() {
         console.log('constructor');
 
         const pathDB = path.resolve(__dirname, '..', '..', 'db', 'test_file.csv');
@@ -21,6 +27,13 @@ export class ReviewsService {
             .on('data', row => this.reviews.push({ ...row, version: 0 }))
             .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`))
 
+    }
+
+
+
+    findAll(): Review[] {
+        this.pubSub.publish('editing', { editing: this.editing });
+        return this.reviews;
     }
 
     // check is is number ??  1a, aa

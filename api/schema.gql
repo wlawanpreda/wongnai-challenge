@@ -1,0 +1,18 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Review {
+  reviewID: Int!
+  review: String!
+  version: Int
+}
+
+type Query {
+  reviews: [Review!]!
+  reserveEdit(id: Float!): Boolean!
+}
+
+type Subscription {
+  editing: [String!]!
+}
