@@ -11,6 +11,7 @@ type Review {
 type Query {
   reviews: [Review!]!
   edit: [Float!]!
+  keywords(query: String): [String!]!
 }
 
 type Mutation {

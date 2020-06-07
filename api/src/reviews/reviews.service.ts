@@ -21,7 +21,7 @@ export class ReviewsService {
 
         const pathDB = path.resolve(__dirname, '..', '..', 'db', 'test_file.csv');
 
-        fs.createReadStream(pathDB)
+        fs.createReadStream(pathDB, {encoding: 'utf8'})
             .pipe(csv.parse({ headers: true, delimiter: ';' }))
             .on('error', error => console.error(error))
             .on('data', row => this.reviews.push({ ...row, version: 0 }))

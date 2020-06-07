@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ReviewsModule } from './reviews/reviews.module';
 import { GraphQLModule } from "@nestjs/graphql";
+import { KeywordsModule } from './keywords/keywords.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { GraphQLModule } from "@nestjs/graphql";
         throw err
       },
     }),
+    KeywordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
