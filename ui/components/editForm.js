@@ -35,8 +35,6 @@ export default props => {
     const [formInput, setFormInput] = useState();
     const [err, setErr] = useState();
 
-
-
     useEffect(() => {
         async function fetch() {
             const url = urlGeneratorQuery(id, "id");

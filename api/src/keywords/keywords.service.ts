@@ -38,4 +38,8 @@ export class KeywordsService {
         return this.keywords;
     }
 
+    vaild(query): boolean {
+        return this.keywords.find(v => v===query) ? true : false;
+    }
+
 }
