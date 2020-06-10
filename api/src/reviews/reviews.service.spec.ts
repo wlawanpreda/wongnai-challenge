@@ -69,7 +69,7 @@ describe('ReviewsService', () => {
 
     it("check edit", async () => {
         const review = service.editReviewById("1", "1234", 0)
-        expect(review.review).toEqual("1234q")
+        expect(review.review).toEqual("1234")
         expect(review.version).toEqual(1)
     })
 
