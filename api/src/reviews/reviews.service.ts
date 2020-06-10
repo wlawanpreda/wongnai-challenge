@@ -17,8 +17,6 @@ export class ReviewsService {
     public pubSub = new PubSub();
 
     constructor() {
-        console.log('constructor');
-
         const pathDB = path.resolve(__dirname, '..', '..', 'db', 'test_file.csv');
 
         fs.createReadStream(pathDB, {encoding: 'utf8'})
@@ -43,7 +41,14 @@ export class ReviewsService {
     }
 
     findByKeyword(query: string): Review[] {
-        return this.reviews.filter(({review}) => review.includes(query))
+        if(query)
+            return this.reviews.filter(({review}) => review.includes(query)).map(obj => ({
+                reviewID: obj.reviewID,
+                version: obj.version,
+                review: obj.review.replace(new RegExp(query, 'g'), `<keyword>${query}</keyword>`)
+            }));
+        else
+            return this.reviews.slice(0, 100);
     }
 
     editReviewById(id: number, review: string, version: number): Review {

@@ -3,13 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 5555",
+    "start:dev": "next dev -p 5555",
     "build": "next build",
     "start": "next start -p 5555"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.2.1",
+    "@next/bundle-analyzer": "^9.4.4",
+    "antd": "4.3.0",
+    "axios": "^0.19.2",
+    "babel-plugin-import": "^1.13.0",
+    "cross-env": "^7.0.2",
+    "dayjs": "1.8.28",
+    "esm": "^3.2.25",
+    "html-react-parser": "^0.13.0",
     "next": "9.4.4",
+    "postcss-preset-env": "^6.7.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "swr": "^0.2.2"
   }
 }

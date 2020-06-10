@@ -16,11 +16,9 @@ export class ReviewsController {
     getReviews(
         @Query('query') query: string,
     ): Review[] {
-        return this.reviewsService.findByKeyword(query).map(obj => ({
-            reviewID: obj.reviewID,
-            version: obj.version,
-            review: obj.review.replace(new RegExp(query, 'g'), `<keyword>${query}</keyword>`)
-        }));
+
+        // check query math keyword
+        return this.reviewsService.findByKeyword(query)
     }
 
     // how to check consistent state ??
