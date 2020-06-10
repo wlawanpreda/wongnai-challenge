@@ -19,12 +19,11 @@ const SearchInput = props => {
     useEffect(() => {
         async function fetch() {
             const dataKeywords = await axiosGraphqlKeywords();
-             setKeywords( dataKeywords ? dataKeywords : [])
+            setKeywords( dataKeywords ? dataKeywords : [])
         }
         fetch();
     }, [])
 
-    // .map(value => ({ value }))
     useEffect(() => {
         setOptions( keywords.filter(v => v.includes(query)).map(value => ({ value })) )
     }, [query])
@@ -46,7 +45,7 @@ const SearchInput = props => {
                 </AutoComplete>}
 
             {searchOption==="id" &&
-                <Search style={{ width: "300px" }} onSearch={setSearch} placeholder="input search text"/>}
+                <Search onSearch={setSearch} placeholder="input search text"/>}
         </Input.Group>
     )
 }
