@@ -4,6 +4,7 @@ WORKDIR /app
 COPY . /app
 
 RUN yarn
+RUN yarn test
 RUN yarn build
 
 EXPOSE 5556
