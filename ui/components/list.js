@@ -3,7 +3,6 @@ import { List, Typography, Tag, message } from "antd";
 import Link from 'next/link';
 
 import axios from 'axios';
-import useSWR from 'swr';
 import * as parse from 'html-react-parser';
 
 import SearchInput from "./searchInput";
@@ -38,12 +37,6 @@ export default props => {
         if(search && searchOption) 
             fetch();
     }, [search])
-
-    // if(!reviews) return 'loading...';
-    // console.log("PJ-LOG: reviews", reviews)
-
-    // if(reviews && search && searchOption === "id")
-    //     reviews = reviews ? [ reviews ] : [];
     
     return (
         <List
