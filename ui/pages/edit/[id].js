@@ -1,16 +1,24 @@
-import Head from 'next/head'
-import List from "../components/list";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import EditForm from "../../components/editForm";
 
-export default function Home() {
+export default function edit(props) {
+
+    const router = useRouter()
+    const { id } = router.query;
+
+    if(!id) return `loading...`;
+    console.log("PJ-LOG: edit -> id", id)
+
     return (
         <div className="container">
             <Head>
-                <title>list review</title>
+                <title>edit review</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <main>
-                <List />
+                <EditForm id={id} />
             </main>
 
 
@@ -67,15 +75,9 @@ export default function Home() {
                 * {
                     box-sizing: border-box;
                 }
-                keyword {
-                    color: darkorange;
-                    font-weight: bold;
-                }
-                Search {
-                    width: 300px;
-                }
                 
             `}</style>
         </div>
     )
 }
+

@@ -7,7 +7,7 @@ import useSWR from 'swr';
 import * as parse from 'html-react-parser';
 
 import SearchInput from "./searchInput";
-import { urlGenerator } from "../models/rest";
+import { urlGeneratorQuery } from "../models/basic";
 
 
 const { Paragraph } = Typography;
@@ -20,7 +20,7 @@ export default props => {
 
     useEffect(() => { setSearch() }, [searchOption]);
 
-    const url = urlGenerator(search, searchOption);
+    const url = urlGeneratorQuery(search, searchOption);
     const { data:reviews, error } = useSWR(url, axios);
 
     if(reviews && search && searchOption === "id")
@@ -43,7 +43,7 @@ export default props => {
             renderItem={({ reviewID, review, version }) => (
                 <List.Item
                     actions={[
-                        <Link href={`/edit/${reviewID}`}><a>Edit</a></Link>
+                        <Link href="/edit/[id]" as={`/edit/${reviewID}`}><a>Edit</a></Link>
                     ]}
                     >
 
