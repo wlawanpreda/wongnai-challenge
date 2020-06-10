@@ -11,27 +11,27 @@ export class ReviewsResolver {
     reviews(): Review[] {
         return this.reviewsService.findAll();
     }
-    @Query(returns => [Number])
-    edit(): Number[] {
+    @Query(returns => [String])
+    edit(): String[] {
         return this.reviewsService.getEditing();
     }
 
     // how to set timeout per once edit
     @Mutation(returns => Boolean)
-    reserveEdit(@Args('id') id: number) {
+    reserveEdit(@Args('id') id: string) {
         return this.reviewsService.reserveEdit(id);
     }
 
     @Mutation(returns => Review)
     editReview(
-        @Args('id') id: number,
+        @Args('id') id: string,
         @Args('review') review: string,
         @Args('version') version: number
     ) {
         return this.reviewsService.editReviewById(id, review, version);
     }
 
-    @Subscription(returns => [Number])
+    @Subscription(returns => [String])
     editing() {
         return this.reviewsService.pubSub.asyncIterator(['editing']);
     }

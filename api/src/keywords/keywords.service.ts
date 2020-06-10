@@ -13,7 +13,7 @@ export class KeywordsService {
         const pathDB = path.resolve(__dirname, '..', '..', 'db', 'food_dictionary.txt');
 
         const label = 'keywords';
-        console.time(label);
+        // console.time(label);
         const stream = fs.createReadStream(pathDB, {encoding: 'utf8'});
         stream.on('data', data => { 
             this.keywords = [
@@ -27,7 +27,7 @@ export class KeywordsService {
         }); 
         
         stream.on('close', () => {
-            console.timeEnd(label);
+            // console.timeEnd(label);
         });
         
     }

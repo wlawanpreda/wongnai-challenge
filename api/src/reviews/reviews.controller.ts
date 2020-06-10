@@ -1,8 +1,7 @@
 import { Controller, Get, Param, Query, Body, Put, BadRequestException, UseFilters } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { Review } from "./interfaces/review.interface";
-import { KeywordsService } from 'src/keywords/keywords.service';
-import { HttpExceptionFilter } from 'src/share/http-exception.filter';
+import { KeywordsService } from '../keywords/keywords.service';
 
 @Controller('reviews')
 export class ReviewsController {
@@ -13,7 +12,7 @@ export class ReviewsController {
     ) { }
 
     @Get(':id')
-    getReviewById(@Param('id') id: number): Review {
+    getReviewById(@Param('id') id: string): Review {
         const result = this.reviewsService.findById(id);
         if(!result) 
             throw new BadRequestException("id not match!");
@@ -33,7 +32,7 @@ export class ReviewsController {
 
     @Put(':id')
     editReviewById(
-        @Param('id') id: number,
+        @Param('id') id: string,
         @Body('review') review: string,
         @Body('version') version: number
     ): Review {

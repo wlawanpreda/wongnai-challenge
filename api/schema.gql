@@ -3,22 +3,22 @@
 # ------------------------------------------------------
 
 type Review {
-  reviewID: Int!
+  reviewID: String!
   review: String!
   version: Int
 }
 
 type Query {
   reviews: [Review!]!
-  edit: [Float!]!
+  edit: [String!]!
   keywords(query: String): [String!]!
 }
 
 type Mutation {
-  reserveEdit(id: Float!): Boolean!
-  editReview(version: Float!, review: String!, id: Float!): Review!
+  reserveEdit(id: String!): Boolean!
+  editReview(version: Float!, review: String!, id: String!): Review!
 }
 
 type Subscription {
-  editing: [Float!]!
+  editing: [String!]!
 }

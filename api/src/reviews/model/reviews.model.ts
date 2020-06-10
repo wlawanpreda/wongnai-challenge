@@ -2,8 +2,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Review {
-  @Field(type => Int)
-  reviewID: number;
+  @Field(type => String)
+  reviewID: string;
 
   @Field(type => String)
   review: string;

@@ -11,8 +11,10 @@ import { PubSub } from "graphql-subscriptions";
 @Injectable()
 export class ReviewsService {
 
+    //not use
+    private editing: string[] = [];
+
     private reviews: Review[] = [];
-    private editing: number[] = [1];
 
     public pubSub = new PubSub();
 
@@ -23,11 +25,9 @@ export class ReviewsService {
             .pipe(csv.parse({ headers: true, delimiter: ';' }))
             .on('error', error => console.error(error))
             .on('data', row => this.reviews.push({ ...row, version: 0 }))
-            .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`))
+            // .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`))
 
     }
-
-
 
     findAll(): Review[] {
         this.pubSub.publish('editing', { editing: this.editing });
@@ -35,7 +35,7 @@ export class ReviewsService {
     }
 
     // check is is number ??  1a, aa
-    findById(id: number): Review {
+    findById(id: string): Review {
         // console.log("PJ-LOG: ReviewsService -> findById -> this.reviews", this.reviews)
         return this.reviews.find(({reviewID}) => reviewID===id);
     }
@@ -51,8 +51,8 @@ export class ReviewsService {
             return this.reviews.slice(0, 100);
     }
 
-    editReviewById(id: number, review: string, version: number): Review {
-        const foundIndex = this.reviews.findIndex(({reviewID}) => reviewID==id);
+    editReviewById(id: string, review: string, version: number): Review {
+        const foundIndex = this.reviews.findIndex(({reviewID}) => reviewID===id);
         if(foundIndex===-1) throw `can not find this id;${id}`;
 
         const target = this.reviews[foundIndex];
@@ -71,11 +71,14 @@ export class ReviewsService {
         return target;
     }
 
-    getEditing(): number[] {
+
+    //not use
+    getEditing(): string[] {
         return this.editing;
     }
 
-    reserveEdit(id: number) {
+    //not use
+    reserveEdit(id: string) {
         if(this.editing.includes(id)) {
             return false;
         } else {
