@@ -26,7 +26,7 @@
     "@nestjs/graphql": "^7.4.1",
     "@nestjs/platform-express": "^7.0.0",
     "apollo-server-express": "^2.14.2",
-    "fast-csv": "^4.3.0",
+    "fast-csv": "^4.3.6",
     "fs": "^0.0.1-security",
     "graphql": "^15.0.0",
     "graphql-subscriptions": "^1.1.0",
